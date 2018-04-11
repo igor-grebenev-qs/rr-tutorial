@@ -18,6 +18,9 @@ app.listen(port, function(error) {
   if (error) {
     console.error(error)
   } else {
-    console.info("==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.", port, port)
+    console.info('==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port)
+    let url = 'http://localhost:7777'
+    let start = (process.platform == 'darwin'? 'open': process.platform == 'win32'? 'start': 'xdg-open');
+    require('child_process').exec(start + ' ' + url);
   }
 })

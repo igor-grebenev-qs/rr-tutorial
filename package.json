@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Maxim Patsianskiy",
+  "author": "Maxim Grebenev",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.4.5",

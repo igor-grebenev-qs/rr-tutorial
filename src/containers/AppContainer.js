@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Menar from './Menar'
 import MultiplicationTestTable from './MultiplicationTestTable'
 require('../assets/styles/sidebar.less')
 export default class AppContainer extends Component {
@@ -21,7 +22,8 @@ export default class AppContainer extends Component {
         <a href="#">Contact</a>
       </div>
       <div>
-        <MultiplicationTestTable />
+        {/*<MultiplicationTestTable />*/}
+        <Menar/>
       </div>
     </div>)
   }

@@ -13,6 +13,11 @@ export default class AppContainer extends Component {
     }
   }
 
+  closeNav() {
+    console.log('closeNav')
+    this.setState({opened: !this.state.opened})
+  }
+
   setApp (app) {
     console.warn('SET APPLICATION', app)
     this.setState({currentApp: app})
@@ -20,19 +25,26 @@ export default class AppContainer extends Component {
 
   render() {
     const {state} = this
+    const wd = state.opened ? '15em' : '3em'
+    const opn = '>>'
     return (
-    <div>
-      <div id="mySidenav" className="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">About</a>
-        <a href="#" onClick={ () => {this.setApp(MULT_APP)}}>Multiplication table</a>
-        <a href="#" onClick={ () => {this.setApp(MENAR_APP)}}>Arithmetic ...</a>
-        <a href="#">Contact</a>
-      </div>
       <div>
-        {state.currentApp === MULT_APP && <MultiplicationTestTable />}
-        {state.currentApp === MENAR_APP && <Menar/>}
-      </div>
-    </div>)
+        <div id="mySidenav" className="sidenav" style={{width: wd}}>
+          {state.opened && (<div className="closebtn" onClick={::this.closeNav}>&#x274C;</div>)}
+          {!state.opened && (<div className="closebtn" onClick={::this.closeNav}>{opn}</div>)}
+          {state.opened && (
+            <div>
+              <button className="svbutton" onClick={ () => {this.setApp(MULT_APP)}}>Multiplication table plugin</button>
+              <button className="svbutton" onClick={ () => {this.setApp(MENAR_APP)}}>Arithmetic plugin</button>
+              <button className="svbutton">Contact</button>)
+            </div>
+            )
+          }
+        </div>
+        <div>
+          {state.currentApp === MULT_APP && <MultiplicationTestTable />}
+          {state.currentApp === MENAR_APP && <Menar/>}
+        </div>
+      </div>)
   }
 }

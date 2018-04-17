@@ -39,9 +39,9 @@ class Menar extends Component {
         ready: false
       })
     } else {
-      window.setTimeout(() => { _this.showRes(_this) }, 2000)
+      window.setTimeout(() => { _this.showRes(_this) }, 4000)
       let interavalId = setInterval(function() {
-        window.setTimeout(() => { _this.showRes(_this) }, 2000)
+        window.setTimeout(() => { _this.showRes(_this) }, 4000)
 
         _this.setState({
           x: Math.floor(Math.random()*99 + 1),
@@ -49,7 +49,7 @@ class Menar extends Component {
           z: Math.floor(Math.random()*99 + 1),
           ready: false
         })
-      }, 5000)
+      }, 8000)
       _this.setState({
         progressInterval: interavalId
       })

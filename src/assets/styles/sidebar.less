@@ -1,14 +1,26 @@
 .sidenav {
   height: 100%; /* 100% Full-height */
-  width: 400; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
   background-color: #111; /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 0px; /* Place content 60px from the top */
+  padding: 0.5em; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+
+  .svbutton {
+    font-size: 1em;
+    font-weight: bold;
+    color: black;
+    background-color: cadetblue;
+    width: 100%;
+    min-height: 2em;
+    border-radius: 0.5em;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 0.5em;
+  }
 }
 
 /* The navigation menu links */
@@ -29,11 +41,15 @@
 
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
-  position: absolute;
+  margin: 0;
+  padding: 0;
   top: 0;
-  right: 25px;
   font-size: 36px;
-  margin-left: 50px;
+  text-align: end;
+  width: 100%;
+  cursor: pointer;
+  background-color: transparent;
+  color: snow;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */

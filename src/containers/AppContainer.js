@@ -34,9 +34,15 @@ export default class AppContainer extends Component {
           {!state.opened && (<div className="closebtn" onClick={::this.closeNav}>{opn}</div>)}
           {state.opened && (
             <div>
-              <button className="svbutton" onClick={ () => {this.setApp(MULT_APP)}}>Multiplication table plugin</button>
-              <button className="svbutton" onClick={ () => {this.setApp(MENAR_APP)}}>Arithmetic plugin</button>
-              <button className="svbutton">Contact</button>)
+              <button className="svbutton" onClick={ () => {this.setApp(MULT_APP)}}>
+                {state.currentApp === MULT_APP && (<div className="activebtn"/>)}
+                Multiplication table plugin
+              </button>
+              <button className="svbutton" onClick={ () => {this.setApp(MENAR_APP)}}>
+                {state.currentApp === MENAR_APP && (<div className="activebtn"/>)}
+                Arithmetic plugin
+              </button>
+              <button className="svbutton">About (to do)</button>)
             </div>
             )
           }

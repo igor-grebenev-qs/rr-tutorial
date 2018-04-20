@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import buttonStyles from '../assets/styles/appButton.css'
 import classNames from 'classnames'
+import NumericInput from 'react-numeric-input';
 
 require('../assets/styles/sample.less')
 
@@ -12,16 +13,9 @@ class MultiplicationTestTable extends Component {
       x: Math.floor(Math.random()*9 + 1),
       y: Math.floor(Math.random()*9 + 1),
       ready: false,
-      progressInterval: undefined
+      progressInterval: undefined,
+      resTimeout: 2000
     }
-  }
-
-  componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        mounted:true
-      })
-    }, 1000)
   }
 
   showRes(_this) {
@@ -31,6 +25,7 @@ class MultiplicationTestTable extends Component {
   }
   
   start (_this) {
+    console.log('start timeout:', _this.state.resTimeout)
     if (this.state.progressInterval) {
       clearInterval(this.state.progressInterval)
       _this.setState({
@@ -38,31 +33,45 @@ class MultiplicationTestTable extends Component {
         ready: false
       })
     } else {
-      window.setTimeout(() => { _this.showRes(_this) }, 2000)
+      window.setTimeout(() => { _this.showRes(_this) }, _this.state.resTimeout)
       let interavalId = setInterval(function() {
-        window.setTimeout(() => { _this.showRes(_this) }, 2000)
+        window.setTimeout(() => { _this.showRes(_this) }, _this.state.resTimeout)
 
         _this.setState({
           x: Math.floor(Math.random()*9 + 1),
           y: Math.floor(Math.random()*9 + 1),
           ready: false
         })
-      }, 5000)
+      }, _this.state.resTimeout + 3000)
       _this.setState({
         progressInterval: interavalId
       })
     }
   }
+
+  timeoutFormat(num) {
+    return num + ' ms';
+  }
+
+  onTimeoutChange (e) {
+    this.setState({resTimeout: +e})
+    if (this.state.progressInterval) { this.start(this) } // stop
+  }
   
   render() {
-    let {x, y, mounted} = this.state
-    if (!mounted) {
-      return null
-    }
+    const {x, y} = this.state
     let res = x*y
     return (
     <div style={{textAlign: 'center'}}>
-          <span className="testClass">Test application</span>
+      <span className="testClass">Result timeout</span>
+      <br/>
+      <NumericInput
+        min={1000}
+        max={10000}
+        value={this.state.resTimeout}
+        step={500}
+        format={this.timeoutFormat}
+        onChange={::this.onTimeoutChange}/>
       <br/>
       <span className="appInfo">Maxim Grebenev</span>
       <br/>
@@ -77,7 +86,7 @@ class MultiplicationTestTable extends Component {
       {this.state.progressInterval && (<font className={'bigText'}>{x} × {y}</font>)}
       <br/>
       {this.state.progressInterval && this.state.ready && (<font className={'resText'}>{res}</font>)}
-      {!this.state.ready && (<div class="logoContainer">
+      {!this.state.ready && (<div>
         <svg className="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
           <circle cx="170" cy="170" r="160" stroke="#E2007C"/>
           <circle cx="170" cy="170" r="135" stroke="#404041"/>

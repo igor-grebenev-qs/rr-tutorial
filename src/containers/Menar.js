@@ -17,14 +17,6 @@ class Menar extends Component {
     }
   }
 
-  componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        mounted:true
-      })
-    }, 1000)
-  }
-
   showRes(_this) {
     _this.setState({
       ready: true
@@ -57,10 +49,7 @@ class Menar extends Component {
   }
   
   render() {
-    let {x, y, z, mounted} = this.state
-    if (!mounted) {
-      return null
-    }
+    let {x, y, z} = this.state
     let res = x+y+z
     return (
     <div style={{textAlign: 'center'}}>
@@ -79,7 +68,7 @@ class Menar extends Component {
       {this.state.progressInterval && (<font className={'bigText'}>{x} + {y} + {z}</font>)}
       <br/>
       {this.state.progressInterval && this.state.ready && (<font className={'resText'}>{res}</font>)}
-      {!this.state.ready && (<div class="logoContainer">
+      {!this.state.ready && (<div>
         <svg className="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
           <circle cx="170" cy="170" r="160" stroke="#E2007C"/>
           <circle cx="170" cy="170" r="135" stroke="#404041"/>

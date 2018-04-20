@@ -9,7 +9,7 @@ export default class AppContainer extends Component {
     super(props)
     this.state = {
       opened: true,
-      currentApp: MULT_APP
+      currentApp: MENAR_APP
     }
   }
 

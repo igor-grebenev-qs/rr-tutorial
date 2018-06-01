@@ -23,10 +23,20 @@ export default class AppContainer extends Component {
     this.setState({currentApp: app})
   }
 
+  // Entry point for tests
+  testMethod () {
+    console.log('>>> test method entry')
+    let o = {101:true, 102:false}
+    console.log('>>> o keys', Object.keys(o))
+    const result = Object.keys(o).reduce((res, key) => ([...res, {sprintId: key, collapsed: o[key]}] ), [])
+    console.warn('>>> result', result)
+  }
+
   render() {
     const {state} = this
     const wd = state.opened ? '15em' : '3em'
     const opn = '>>'
+    this.testMethod()
     return (
       <div>
         <div id="mySidenav" className="sidenav" style={{width: wd}}>
